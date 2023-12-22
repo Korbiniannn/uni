@@ -24,7 +24,7 @@ class triangle:
         self.p3 = p3
     
     def side_lengths(self,):
-        pass
+        print("Hi")
     
     def angles(self,):
         pass
