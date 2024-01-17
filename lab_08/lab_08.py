@@ -72,14 +72,12 @@ def matches(a, b):
     1
     """
     c = zip(a, b)
-    k = 0
-    for num in c:
-        num = iter(num)
-        current_num = next(num)
-        second_num = next(num)
-        if current_num == second_num:
-            k += 1
-    return k
+    count = 0
+    for tup in c:
+        tup = iter(tup)
+        if next(tup) == next(tup):
+            count += 1
+    return count
 
 def palindrome(s):
     """Return whether s is the same sequence backward and forward.
