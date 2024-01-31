@@ -1,18 +1,42 @@
-def is_sorted(L1):
+import random as r
+from time import perf_counter
+
+sample1 = r.sample(range(0,1000000), 1000000)
+
+
+
+def binary_search(L,x):
     """
-    >>> is_sorted([3, 2, 4, 1])
-    False
-    >>> is_sorted([1, 3, 5, 7])
+    >>> binary_search([1,2,3,4,5,6,7,8], 6)
     True
+    >>> binary_search([], 5)
+    False
+    >>> binary_search([4,5,6,7,8,9,10], 10)
+    True
+    >>> binary_search([4,5,6,7,8,9,], 10)
+    False
     """
-    
-    for idx in range(0, len(L1) - 2):
-        for idx2 in range(1, len(L1) - 1):
-            if L1[idx] <= L1[idx2]:
-                pass 
-            else:
-                return False
-    return True
+    if L ==[]:
+        return False
+    if len(L) == 1:
+        if L[0] == x:
+            return True
+        else:
+            return False
+    else:
+        middle = len(L) // 2
+        if L[middle] > x:
+            return binary_search(L[:middle], x)
+        elif L[middle] < x:
+            return binary_search(L[middle:], x)
+        else:
+            return True
+
+def linear_search(L, x):
+    for elem in L:
+        if elem == x:
+            return True
+    return False
 
 def bubb_sort(L1):
     """
