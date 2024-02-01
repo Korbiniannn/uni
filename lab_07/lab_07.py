@@ -17,26 +17,56 @@ class Point:
         vert = other.y - self.y
         horiz = other.x - self.x
         return math.atan2(vert, horiz)
-class triangle:
-    def __init__(self, p1 = Point, p2 = Point, p3 = Point):
+class triangle(Point):
+    '''
+    >>> t = triangle(Point(2,3), Point(5,6), Point(3, 5))
+    >>> t.angle_classification()
+    'acute'
+    >>> t.side_classification()
+    'Isosceles'
+    '''
+    def __init__(self, p1, p2, p3):
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
     
-    def side_lengths(self,):
-        print("Hi")
+    def side_lengths(self):
+        first = self.p1.euclidean_distance(self.p2)
+        second = self.p2.euclidean_distance(self.p3)
+        third = self.p3.euclidean_distance(self.p1)
+        return first, second, third
+
     
-    def angles(self,):
-        pass
+    def angles(self):
+        a = self.p1.angle_between(self.p2)
+        b = self.p2.angle_between(self.p3)
+        c = self.p3.angle_between(self.p1)
+        return a, b, c
 
-    def side_classification(self,):
-        pass
+    def side_classification(self):
+        if self.side_lengths()[0] == self.side_lengths()[1] == self.side_lengths()[2]:
+            return 'Equilateral'
+        if self.side_lengths()[0] == self.side_lengths()[1] or self.side_lengths()[1] == self.side_lengths()[2] or self.side_lengths()[0] == self.side_lengths()[2]:
+            return 'Isosceles'
+        else:
+            return 'Scalene'
 
-    def angle_classification(self,):
-        pass
+    def angle_classification(self):
+        x = self.angles()
+        if x[0] == 90 or x[1] == 90 or x[2] == 90:
+            return 'right'
+        if x[0] >= 90 or x[1] >= 90 or x[2] >= 90:
+            return 'obtuse'
+        if x[0] == x[1] == x[2]:
+            return 'equiangular'
+        else:
+            return 'acute'
 
-    def is_right(self,):
-        pass
+    def is_right(self):
+        if self.angle_classification() == 'right':
+            return True
+        else:
+            False
 
     def area(self,):
         pass
